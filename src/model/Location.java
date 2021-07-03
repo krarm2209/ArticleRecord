@@ -16,6 +16,14 @@ public class Location {
         this.other = null;
     }
 
+    public Location(String aRegion, String aCountry, String aState, String aCity, String aOther) {
+        this.region = aRegion;
+        this.country = aCountry;
+        this.state = aState;
+        this.city = aCity;
+        this.other = aOther;
+    }
+
     public Location setCountry(String aCountry) {
         //TODO: validation
         this.country = aCountry;
