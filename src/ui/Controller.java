@@ -35,11 +35,13 @@ public class Controller implements Initializable {
     @FXML
     private TextField journalField;
     @FXML
-    private CheckComboBox disciplineBox;
+    private CheckComboBox<String> disciplineBox;
     @FXML
     private Button next_2;
     @FXML
     private Button locationSelectorButton;
+    @FXML
+    private Button mineSelectorButton;
     @FXML
     private ComboBox<String> regionBox;
     @FXML
@@ -54,6 +56,10 @@ public class Controller implements Initializable {
     private Button back_1;
     @FXML
     private Button addLocationButton;
+    @FXML
+    private TextField commodityField;
+    @FXML
+    private CheckComboBox<String> methodBox;
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,6 +76,10 @@ public class Controller implements Initializable {
 
         if (regionBox != null) {
             regionBox.getItems().addAll("Africa", "Asia", "Oceania", "Europe", "North America", "South America");
+        }
+
+        if (methodBox != null) {
+            methodBox.getItems().addAll("Experimental (Laboratory)", "Modelling", "Observational", "Survey", "Interviews", "Field Studies", "Case Studies", "Document Analysis", "Meta-Analysis", "GIS", "Other (To specify)");
         }
 
     }
@@ -130,6 +140,15 @@ public class Controller implements Initializable {
         Scene selectionScene = new Scene(selectionParent);
 
         Stage window = (Stage)back_1.getScene().getWindow();
+        window.setScene(selectionScene);
+        window.show();
+    }
+
+    public void loadInitMineScene() throws IOException {
+        Parent selectionParent = FXMLLoader.load(getClass().getResource("initMine.fxml"));
+        Scene selectionScene = new Scene(selectionParent);
+
+        Stage window = (Stage)mineSelectorButton.getScene().getWindow();
         window.setScene(selectionScene);
         window.show();
     }

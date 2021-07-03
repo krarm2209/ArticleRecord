@@ -15,11 +15,13 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Button fx:id="locationSelectorButton" mnemonicParsing="false" onAction="#loadInitLocationScene" text="Add location" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="next_3" mnemonicParsing="false" text="Next" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="next_3" mnemonicParsing="false" text="Next" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="mineSelectorButton" mnemonicParsing="false" onAction="#loadInitMineScene" text="Add Mine" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
