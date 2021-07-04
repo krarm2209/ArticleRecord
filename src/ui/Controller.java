@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import model.Article;
 import model.Journal;
 import model.Location;
+import model.Mine;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class Controller implements Initializable {
     private static Article curArticle;
     private static Journal curJournal;
     private static Location curLocation;
+    private static Mine curMine;
 
     @FXML
     private TextField authorField;
@@ -55,11 +57,26 @@ public class Controller implements Initializable {
     @FXML
     private Button back_1;
     @FXML
-    private Button addLocationButton;
-    @FXML
     private TextField commodityField;
     @FXML
-    private CheckComboBox<String> methodBox;
+    private CheckComboBox<String> miningMethodBox;
+    @FXML
+    private Button researchSelectorButton;
+    @FXML
+    private CheckComboBox<String> researchMethodBox;
+    @FXML
+    private Button pmluSelectorButton;
+    @FXML
+    private CheckComboBox<String> pmluBox;
+    @FXML
+    private Button topicSelectorButton;
+    @FXML
+    private CheckComboBox<String> topicBox;
+    @FXML
+    private Button dataTypeSelectorButton;
+    @FXML
+    private ComboBox<String> dataTypeBox;
+
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,10 +95,25 @@ public class Controller implements Initializable {
             regionBox.getItems().addAll("Africa", "Asia", "Oceania", "Europe", "North America", "South America");
         }
 
-        if (methodBox != null) {
-            methodBox.getItems().addAll("Experimental (Laboratory)", "Modelling", "Observational", "Survey", "Interviews", "Field Studies", "Case Studies", "Document Analysis", "Meta-Analysis", "GIS", "Other (To specify)");
+        if (miningMethodBox != null) {
+            miningMethodBox.getItems().addAll("Open-Pit", "Underground", "Placer", "In-Situ", "Mixed (To specify)");
         }
 
+        if (researchMethodBox != null) {
+            researchMethodBox.getItems().addAll("Experimental (Laboratory)", "Modelling", "Observational", "Survey", "Interviews", "Field Studies", "Case Studies", "Document Analysis", "Meta-Analysis", "GIS", "Other (To specify)");
+        }
+
+        if (pmluBox != null) {
+            pmluBox.getItems().addAll("Aquaculture", "Native Ecosystems", "Biodiversity Corridor", "Reuse of residue", "Renewable Energy", "Protected Horticulture", "Hydroponics", "Cropping", "Tourism", "Regenerative Agriculture", "Intensive Livestock Production", "Grazing", "Other (To specify)");
+        }
+
+        if (topicBox != null) {
+            topicBox.getItems().addAll("Post Mining Land Use", "Mine Rehabilitation", "Mixed", "Other (To specify)");
+        }
+
+        if (dataTypeBox != null) {
+            dataTypeBox.getItems().addAll("Qualitative", "Quantitative", "Mixed");
+        }
     }
 
     public void initArticle() throws IOException {
@@ -98,9 +130,8 @@ public class Controller implements Initializable {
     }
 
     public void initJournal() throws IOException {
-        ArrayList<String> discList = new ArrayList<String>();
-        discList.addAll(disciplineBox.getItems());
-        curJournal = new Journal(journalField.getText(), discList);
+        ArrayList<String> tempList = new ArrayList<String>(disciplineBox.getCheckModel().getCheckedItems());
+        curJournal = new Journal(journalField.getText(), tempList);
         curArticle.setJournal(curJournal);
         System.out.println("bruhx2");
         //TODO: implement other field feature
@@ -128,6 +159,7 @@ public class Controller implements Initializable {
         curLocation = new Location(regionBox.getValue(), countryField.getText(), stateField.getText(), cityField.getText(), otherField.getText());
         curArticle.setLocation(curLocation);
         System.out.println("Bruhx3");
+        regionBox.setValue(null);
         countryField.clear();
         stateField.clear();
         cityField.clear();
@@ -145,11 +177,83 @@ public class Controller implements Initializable {
     }
 
     public void loadInitMineScene() throws IOException {
-        Parent selectionParent = FXMLLoader.load(getClass().getResource("initMine.fxml"));
-        Scene selectionScene = new Scene(selectionParent);
+        Parent addMineParent = FXMLLoader.load(getClass().getResource("initMine.fxml"));
+        Scene addMineScene = new Scene(addMineParent);
 
         Stage window = (Stage)mineSelectorButton.getScene().getWindow();
-        window.setScene(selectionScene);
+        window.setScene(addMineScene);
         window.show();
+    }
+
+    public void initMine() {
+        ArrayList<String> tempList = new ArrayList<String>(miningMethodBox.getCheckModel().getCheckedItems());
+        curMine = new Mine(commodityField.getText(), tempList);
+        miningMethodBox.getCheckModel().clearChecks();
+        curArticle.setMine(curMine);
+        System.out.println("Bruhx4");
+        commodityField.clear();
+    }
+
+    public void loadInitResearchMethodScene() throws IOException {
+        Parent researchMethodParent = FXMLLoader.load(getClass().getResource("initResearchMethod.fxml"));
+        Scene researchMethodScene = new Scene(researchMethodParent);
+
+        Stage window = (Stage)researchSelectorButton.getScene().getWindow();
+        window.setScene(researchMethodScene);
+        window.show();
+    }
+
+    public void initResearchMethod() {
+        ArrayList<String> tempList = new ArrayList<String>(researchMethodBox.getCheckModel().getCheckedItems());
+        curArticle.setResearchMethods(tempList);
+        System.out.println("bruhx5");
+        researchMethodBox.getCheckModel().clearChecks();
+    }
+
+    public void loadInitPmluScene() throws IOException {
+        Parent addPmluParent = FXMLLoader.load(getClass().getResource("initPmlu.fxml"));
+        Scene addPmluScene = new Scene(addPmluParent);
+
+        Stage window = (Stage)pmluSelectorButton.getScene().getWindow();
+        window.setScene(addPmluScene);
+        window.show();
+    }
+
+    public void initPmlu() {
+        ArrayList<String> tempList = new ArrayList<String>(pmluBox.getCheckModel().getCheckedItems());
+        curArticle.setPMLU(tempList);
+        System.out.println("Bruhx6");
+        pmluBox.getCheckModel().clearChecks();
+    }
+
+    public void loadInitTopicScene() throws IOException {
+        Parent addTopicParent = FXMLLoader.load(getClass().getResource("initTopic.fxml"));
+        Scene addTopicScene = new Scene(addTopicParent);
+
+        Stage window = (Stage)topicSelectorButton.getScene().getWindow();
+        window.setScene(addTopicScene);
+        window.show();
+    }
+
+    public void initTopic() {
+        ArrayList<String> tempList = new ArrayList<String>(topicBox.getCheckModel().getCheckedItems());
+        curArticle.setTopic(tempList);
+        topicBox.getCheckModel().clearChecks();
+        System.out.println("bruhx7");
+    }
+
+    public void loadInitDataTypeScene() throws IOException {
+        Parent addDataTypeParent = FXMLLoader.load(getClass().getResource("initDataType.fxml"));
+        Scene addDataTypeScene = new Scene(addDataTypeParent);
+
+        Stage window = (Stage)dataTypeSelectorButton.getScene().getWindow();
+        window.setScene(addDataTypeScene);
+        window.show();
+    }
+
+    public void initDataType() {
+        curArticle.setDataType(dataTypeBox.getValue());
+        dataTypeBox.setValue(null);
+        System.out.println("Bruhx8");
     }
 }

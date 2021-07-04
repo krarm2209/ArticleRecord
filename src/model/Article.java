@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+//TODO: REVIEW METHODS
 public class Article {
     private String author;
     private int pubYear;
@@ -49,7 +50,7 @@ public class Article {
 
     public Article setResearchMethods(ArrayList<String> aMethodsList) {
         //TODO: validation (check for existing and append)
-        this.research = aMethodsList;
+        this.research.addAll(aMethodsList);
         return this;
     }
 
@@ -71,9 +72,20 @@ public class Article {
         return this;
     }
 
+    public Article setTopic(ArrayList<String> topicList) {
+        this.topics.addAll(topicList);
+        return this;
+    }
+
     public Article setPMLU(String aPMLU) {
         //TODO: validation
         this.pmlus.add(aPMLU);
+        return this;
+    }
+
+    public Article setPMLU(ArrayList<String> pmlus) {
+        //TODO: validation
+        this.pmlus.addAll(pmlus);
         return this;
     }
 

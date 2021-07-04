@@ -12,6 +12,11 @@ public class Mine {
         this.methods = new ArrayList<String>();
     }
 
+    public Mine(String aCommodity, ArrayList<String> methods) {
+        this.commodity = aCommodity;
+        this.methods = methods;
+    }
+
     public Mine setMiningMethod(String aMethod) {
         //TODO: validation
         this.methods.add(aMethod);
