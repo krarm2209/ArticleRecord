@@ -1,8 +1,10 @@
 package model;
 
+import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Mine {
+public class Mine implements Serializable {
     private String commodity;
     private ArrayList<String> methods;
 

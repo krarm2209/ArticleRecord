@@ -1,5 +1,6 @@
 package ui;
 
+import datastruct.Struct;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +26,8 @@ public class Controller implements Initializable {
     private static Journal curJournal;
     private static Location curLocation;
     private static Mine curMine;
+    private static Struct db;
+    private static boolean initialLaunch = true; //true if initialLauch => flag used in initialization for loading db
 
     @FXML
     private TextField authorField;
@@ -80,6 +83,16 @@ public class Controller implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
+        if (initialLaunch) {
+            db = Struct.load();
+            if (db == null) {
+                db = new Struct();
+                db.save();
+                System.out.println("created");
+            }
+            initialLaunch = false;
+            System.out.println(db.getTitleHashTable().entrySet());
+        }
 
         if (yearBox != null) {
             for (int i = 1800; i <= 2020; i++) {
@@ -255,5 +268,9 @@ public class Controller implements Initializable {
         curArticle.setDataType(dataTypeBox.getValue());
         dataTypeBox.setValue(null);
         System.out.println("Bruhx8");
+    }
+
+    public void saveEntry() {
+        db.put(curArticle);
     }
 }

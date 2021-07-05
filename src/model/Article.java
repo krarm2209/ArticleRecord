@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //TODO: REVIEW METHODS
-public class Article {
+public class Article implements Serializable {
     private String author;
     private int pubYear;
     private String title;

@@ -31,7 +31,7 @@
             <Label text="Commodity" />
             <Label text="Methods" GridPane.rowIndex="1" />
             <TextField fx:id="commodityField" GridPane.columnIndex="1" />
-            <CheckComboBox fx:id="methodBox" prefHeight="25.0" prefWidth="98.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckComboBox fx:id="miningMethodBox" prefHeight="25.0" prefWidth="98.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

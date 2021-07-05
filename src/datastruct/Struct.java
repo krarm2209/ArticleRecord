@@ -3,25 +3,38 @@ package datastruct;
 import model.Article;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Struct implements Serializable {
-    private Hashtable<String, Object> titleStruct;
+    private Hashtable<String, Article> titleHashTable;
+    private ArrayList<Article> articleList;
 
     public Struct() {
-        this.titleStruct = new Hashtable<String, Object>();
+        this.titleHashTable = new Hashtable<String, Article>();
+        this.articleList = new ArrayList<Article>();
     }
 
-    public Hashtable<String, Object> put(Article a) {
-        this.titleStruct.put(a.getTitle(), a);
-        return this.titleStruct;
+    public ArrayList<Article> put(Article a) {
+        this.titleHashTable.put(a.getTitle(), a);
+        this.articleList.add(a);
+        this.save();
+        return this.articleList;
+    }
+
+    public ArrayList<Article> getRecords() {
+        return this.articleList;
+    }
+
+    public Hashtable<String, Article> getTitleHashTable() {
+        return this.titleHashTable;
     }
 
     public boolean save() {
         try {
-            FileOutputStream fos = new FileOutputStream("titlemap.ser");
+            FileOutputStream fos = new FileOutputStream("struct.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.titleStruct);
+            oos.writeObject(this);
             oos.close();
             fos.close();
             return true;
@@ -34,20 +47,20 @@ public class Struct implements Serializable {
         }
     }
 
-    public boolean load() {
+    public static Struct load() {
         try {
-            FileInputStream fis = new FileInputStream("titlemap.ser");
+            FileInputStream fis = new FileInputStream("struct.ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            this.titleStruct = (Hashtable<String, Object>) ois.readObject();
+            Struct temp = (Struct) ois.readObject();
             ois.close();
             fis.close();
-            return true;
+            return temp;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return false;
+            return null;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 }

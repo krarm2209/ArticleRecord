@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Journal {
+public class Journal implements Serializable {
     private String name;
     private ArrayList<String> disciplines;
 

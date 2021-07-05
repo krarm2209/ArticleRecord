@@ -24,7 +24,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="locationSelectorButton" mnemonicParsing="false" onAction="#loadInitLocationScene" text="Add location" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="next_3" mnemonicParsing="false" text="Next" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveEntry" text="Save" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
             <Button fx:id="mineSelectorButton" mnemonicParsing="false" onAction="#loadInitMineScene" text="Add Mine" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button fx:id="researchSelectorButton" mnemonicParsing="false" onAction="#loadInitResearchMethodScene" text="Add Research Method" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button fx:id="pmluSelectorButton" mnemonicParsing="false" onAction="#loadInitPmluScene" text="Add PMLU" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
